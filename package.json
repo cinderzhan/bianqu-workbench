@@ -1,0 +1,59 @@
+{
+  "name": "dsh-bianqu-workbench",
+  "version": "0.1.1",
+  "description": "编曲工作台 · 灵感库：随手记录旋律动机、和声走向与歌词片段，可搜索、筛选、归档；需要时再打开 AI 对话继续创作。",
+  "keywords": [
+    "dsh-plugin",
+    "workbench",
+    "music",
+    "arrangement",
+    "编曲",
+    "灵感库"
+  ],
+  "license": "MIT",
+  "author": "cinderzhan",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cinderzhan/bianqu-workbench.git"
+  },
+  "type": "module",
+  "main": "./dsh/index.js",
+  "exports": {
+    ".": "./dsh/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dsh",
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check dsh/index.js && node --check dsh/store.js && node --check lib/client.js",
+    "test": "node --test test/store.test.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "dsh-desktop-workbenches"
+      ]
+    }
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.2"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.2 <5.0.0-0"
+  }
+}
